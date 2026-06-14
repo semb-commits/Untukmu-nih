@@ -4,9 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Untuk Kamu</title>
+
+<!-- Open Graph buat WhatsApp -->
+<meta property="og:title" content="Ada sesuatu buat kamu">
+<meta property="og:description" content="Boleh minta 30 detik waktunya nggak?">
+<meta property="og:image" content="https://semb-commits.github.io/Untukmu-nih/IMG-20260614-WA0022.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://semb-commits.github.io/Untukmu-nih/">
+
+<!-- WhatsApp kadang butuh ini juga -->
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=DM+Mono:wght@400&display=swap');
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-  
+
   body {
     font-family: 'Poppins', sans-serif;
     height: 100vh;
@@ -17,59 +35,65 @@
     background: transparent;
   }
 
-  .bg {
+.bg {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background-image: url('IMG-20260614-WA0022.jpg');
     background-size: cover;
     background-position: center;
-    filter: brightness(0.6);
+    filter: brightness(0.5);
     z-index: -1;
   }
 
-  .slide {
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    padding: 40px 30px;
+.slide {
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    padding: 45px 35px;
     border-radius: 20px;
-    text-align: center;
-    max-width: 350px;
+    text-align: left;
+    max-width: 420px;
     color: white;
     display: none;
-    animation: fadeIn 0.6s ease;
   }
 
-  .slide.active { display: block; }
+.slide.active { display: block; }
 
   h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 600;
   }
 
   p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 25px;
+    font-size: 20px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    font-family: 'DM Mono', monospace;
+    min-height: 60px;
+  }
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+    position: relative;
   }
 
   button {
     background: #ff6b81;
     color: white;
     border: none;
-    padding: 12px 25px;
+    padding: 14px 28px;
     border-radius: 12px;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
     transition: 0.2s;
+    font-weight: 600;
   }
 
-  .btn-group {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    position: relative;
-    height: 50px;
+  button:hover {
+    transform: translateY(-2px);
   }
 
   #btnTidak {
@@ -77,9 +101,18 @@
     background: #555;
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 22px;
+    background: white;
+    animation: blink 0.7s infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
   }
 </style>
 </head>
@@ -92,53 +125,90 @@
 </audio>
 
 <!-- Halaman 1 -->
-<div class="slide active" id="slide1">
-  <h2>Hai...</h2>
-  <p>Boleh minta waktu bentar nggak? Cuma 30 detik kok.</p>
-  <button onclick="nextSlide(1)">Lanjut</button>
+<div class="slide active" id="slide1" data-aos="fade-up">
+  <h2 data-aos="fade-up" data-aos-delay="200">Hai...</h2>
+  <p id="text1"></p>
+  <button onclick="nextSlide(1)" data-aos="fade-up" data-aos-delay="600">Lanjut</button>
 </div>
 
 <!-- Halaman 2 -->
-<div class="slide" id="slide2">
-  <h2>Jadi gini</h2>
-  <p>Aku nggak pinter ngomong langsung. Makanya aku bikin ini biar lebih enak bacanya.</p>
-  <button onclick="nextSlide(2)">Lanjut lagi</button>
+<div class="slide" id="slide2" data-aos="fade-up">
+  <h2 data-aos="fade-up" data-aos-delay="200">Jadi gini</h2>
+  <p id="text2"></p>
+  <button onclick="nextSlide(2)" data-aos="fade-up" data-aos-delay="600">Lanjut lagi</button>
 </div>
 
 <!-- Halaman 3 -->
-<div class="slide" id="slide3">
-  <h2>Pertanyaan terakhir</h2>
-  <p>Kalau aku ajak ngobrol lebih sering, kamu mau nggak?</p>
-  <div class="btn-group">
+<div class="slide" id="slide3" data-aos="fade-up">
+  <h2 data-aos="fade-up" data-aos-delay="200">Pertanyaan terakhir</h2>
+  <p id="text3"></p>
+  <div class="btn-group" data-aos="fade-up" data-aos-delay="600">
     <button onclick="kirimWA('Mau')">Mau</button>
     <button id="btnTidak">Tidak Mau</button>
   </div>
 </div>
 
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-let currentSlide = 1;
+AOS.init({ duration: 800, once: true });
+
 const musik = document.getElementById('musik');
 const btnTidak = document.getElementById('btnTidak');
 
-// Play musik pas user klik pertama kali
+const texts = {
+ 1: "Boleh minta waktu bentar nggak? Cuma 30 detik kok.",
+ 2: "Aku nggak pinter ngomong langsung. Makanya aku bikin ini biar lebih enak bacanya.",
+ 3: "Kalau aku ajak ngobrol lebih sering, kamu mau nggak?"
+};
+
 document.body.addEventListener('click', () => {
   musik.play().catch(()=>{});
 }, { once: true });
 
+function typeWriter(text, elementId, speed = 50, callback) {
+  let i = 0;
+  const element = document.getElementById(elementId);
+  element.innerHTML = '';
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    } else {
+      element.innerHTML += '<span class="cursor"></span>';
+      if (callback) callback();
+    }
+  }
+  typing();
+}
+
+window.onload = () => {
+  startTyping(1);
+}
+
+function startTyping(slideNum) {
+  typeWriter(texts[slideNum], 'text' + slideNum);
+}
+
 function nextSlide(n) {
   document.getElementById('slide' + n).classList.remove('active');
   document.getElementById('slide' + (n+1)).classList.add('active');
+  startTyping(n+1);
 }
 
-// Tombol "Tidak Mau" kabur
 btnTidak.addEventListener('mouseover', moveButton);
 btnTidak.addEventListener('touchstart', moveButton);
 
 function moveButton() {
-  const x = Math.random() * (window.innerWidth - 150);
-  const y = Math.random() * (window.innerHeight - 150);
+  const btnRect = btnTidak.getBoundingClientRect();
+  const maxX = window.innerWidth - btnRect.width - 20;
+  const maxY = window.innerHeight - btnRect.height - 20;
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
   btnTidak.style.left = x + 'px';
   btnTidak.style.top = y + 'px';
+  btnTidak.style.position = 'fixed';
 }
 
 function kirimWA(pesan) {
@@ -149,4 +219,4 @@ function kirimWA(pesan) {
 </script>
 
 </body>
-  </html>
+   </html>

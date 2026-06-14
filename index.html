@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Kamu</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('IMG-20260614-WA0022.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6);
+    z-index: -1;
+  }
+
+  .slide {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    padding: 40px 30px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 350px;
+    color: white;
+    display: none;
+    animation: fadeIn 0.6s ease;
+  }
+
+  .slide.active { display: block; }
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+
+  button {
+    background: #ff6b81;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    position: relative;
+    height: 50px;
+  }
+
+  #btnTidak {
+    position: absolute;
+    background: #555;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<audio id="musik" loop>
+  <source src="Sabar%20-%20Sadewok%20Official%20Music%20Video.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Halaman 1 -->
+<div class="slide active" id="slide1">
+  <h2>Hai...</h2>
+  <p>Boleh minta waktu bentar nggak? Cuma 30 detik kok.</p>
+  <button onclick="nextSlide(1)">Lanjut</button>
+</div>
+
+<!-- Halaman 2 -->
+<div class="slide" id="slide2">
+  <h2>Jadi gini</h2>
+  <p>Aku nggak pinter ngomong langsung. Makanya aku bikin ini biar lebih enak bacanya.</p>
+  <button onclick="nextSlide(2)">Lanjut lagi</button>
+</div>
+
+<!-- Halaman 3 -->
+<div class="slide" id="slide3">
+  <h2>Pertanyaan terakhir</h2>
+  <p>Kalau aku ajak ngobrol lebih sering, kamu mau nggak?</p>
+  <div class="btn-group">
+    <button onclick="kirimWA('Mau')">Mau</button>
+    <button id="btnTidak">Tidak Mau</button>
+  </div>
+</div>
+
+<script>
+let currentSlide = 1;
+const musik = document.getElementById('musik');
+const btnTidak = document.getElementById('btnTidak');
+
+// Play musik pas user klik pertama kali
+document.body.addEventListener('click', () => {
+  musik.play().catch(()=>{});
+}, { once: true });
+
+function nextSlide(n) {
+  document.getElementById('slide' + n).classList.remove('active');
+  document.getElementById('slide' + (n+1)).classList.add('active');
+}
+
+// Tombol "Tidak Mau" kabur
+btnTidak.addEventListener('mouseover', moveButton);
+btnTidak.addEventListener('touchstart', moveButton);
+
+function moveButton() {
+  const x = Math.random() * (window.innerWidth - 150);
+  const y = Math.random() * (window.innerHeight - 150);
+  btnTidak.style.left = x + 'px';
+  btnTidak.style.top = y + 'px';
+}
+
+function kirimWA(pesan) {
+  const nomor = '62895351432524';
+  const text = encodeURIComponent(pesan);
+  window.open(`https://wa.me/${nomor}?text=${text}`, '_blank');
+}
+</script>
+
+</body>
+  </html>
